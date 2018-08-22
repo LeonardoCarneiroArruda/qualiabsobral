@@ -12,8 +12,7 @@ class Banco {
 	public static function connect() {
 
 		$conn = new \PDO("mysql:dbname=".Banco::DBNAME.";host=".Banco::HOSTNAME, Banco::USERNAME, Banco::PASSWORD);
-		echo "passou";
-		var_dump($conn);
+
 		return $conn;
 	}
 

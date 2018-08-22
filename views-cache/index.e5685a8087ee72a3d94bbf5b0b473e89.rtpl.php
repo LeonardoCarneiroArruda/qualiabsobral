@@ -6,8 +6,8 @@
       <h1>
         QualiAB Sobral
         <small>
-          Bem- Vindo<br>
-          Existem 91 questões neste questionário!
+          Bem - Vindo!<br>
+          
         </small>
       </h1>
       <ol class="breadcrumb">
@@ -20,10 +20,6 @@
     <section class="content">
 
       
-      
-
-
-     <a href="/qualiabsobral/grupo1"><button type="submmit" class="btn btn-success">Próximo</button></a>
 
       <!-- Your Page Content Here -->
 

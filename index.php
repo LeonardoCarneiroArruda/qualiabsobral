@@ -9,6 +9,7 @@ use Rain\Tpl;
 use \Slim\Slim;
 use \Classes\Page;
 use \Classes\Usuario;
+use \Classes\Candidato;
 
 
 $app = new Slim();
@@ -43,101 +44,20 @@ $app->get("/index", function() {
 
 });
 
-$app->get("/grupo1", function() {
+$app->get("/candidatos", function() {
 
+	$candidatos = new Candidato();
+
+	$candidatos = $candidatos->selectAll();
+	
 	$page = new Page();
 
-	$page->setTpl("grupo1");
+	$page->setTpl("candidatos", [
+		'candidatos'=>$candidatos
+	]);
 
 });
 
-$app->get("/grupo2", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo2");
-
-});
-
-$app->get("/grupo3.1", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.1");
-
-});
-
-$app->get("/grupo3.2", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.2");
-
-});
-
-$app->get("/grupo3.3", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.3");
-
-});
-
-$app->get("/grupo3.4", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.4");
-
-});
-
-$app->get("/grupo3.5", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.5");
-
-});
-
-$app->get("/grupo3.6", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.6");
-
-});
-
-$app->get("/grupo3.7", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo3.7");
-
-});
-
-$app->get("/grupo4.1", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo4.1");
-
-});
-
-$app->get("/grupo4.2", function() {
-
-	$page = new Page();
-
-	$page->setTpl("grupo4.2");
-
-});
-
-$app->get("/fim", function() {
-
-	$page = new Page();
-
-	$page->setTpl("fim");
-
-});
 
 $app->run();
 

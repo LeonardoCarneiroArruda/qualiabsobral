@@ -1,6 +1,8 @@
 <?php
 
-require_once("DB". DIRECTORY_SEPARATOR ."config_banco.php");
+namespace Classes;
+
+use \Classes\DB\Banco;
 
 class Candidato {
 
@@ -31,6 +33,19 @@ class Candidato {
 
 	public function getinstituicao() {
 		return $this->instituicao;
+	}
+
+	public function selectAll() {
+
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select * from candidato");
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $results;
 	}
 
 }
