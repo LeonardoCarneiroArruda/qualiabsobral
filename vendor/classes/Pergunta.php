@@ -35,6 +35,8 @@ class Pergunta {
 		return $this->idgrupo_pergunta;
 	}
 
+
+	//CONJUNTO DE FUNCOES QUE RECUPERAM AS QUESTOES E ALTERNATIVAS DO LIMESURVEY E INSEREM NESTA PLATAFORMA
 	public function recuperaQuestions() {
 
 		//Estabelecendo conexao com BD do Lime
@@ -46,7 +48,7 @@ class Pergunta {
 		
 		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-		for ($i = 0; $results[$i]['title'] !== 'G1Q5'; $i++) {
+		for ($i = 0; $i <= count($results); $i++) {
 			
 			if ($results[$i]['title'][2] === 'Q' ) {
 
@@ -57,14 +59,20 @@ class Pergunta {
 				$this->addQuestions($codigo, $descricao, $idgrupo_pergunta);
 			
 			}
+			else if ($results[$i]['title'][0] === 'Q') {
+				$descricao = $results[$i]['question'];
+				$idpergunta = $this->returnNumero($results[$i]['title']);
+				$peso = $results[$i]['relevance'];
+				$codigo = $results[$i]['title'];
+
+				$this->addAlternativa($descricao, $idpergunta, $peso, $codigo);
+			}
 		}
 
 		
 	}
 
 	public function addQuestions($codigo, $descricao, $idgrupo_pergunta) {
-
-		echo $descricao; 
 
 		$conn = Banco::connect();
 
@@ -76,9 +84,37 @@ class Pergunta {
 
 		$stmt->execute();
 
-		echo "inseriu";
-
 	}
+
+	public function addAlternativa($descricao, $idpergunta, $peso, $codigo) {
+
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("INSERT INTO alternativa (descricao, peso, idpergunta, codigo) VALUES (:descricao, :peso, :idpergunta, :codigo)");
+
+		$stmt->bindParam(":descricao", $descricao);
+		$stmt->bindParam(":peso", $peso);
+		$stmt->bindParam(":idpergunta", $idpergunta);
+		$stmt->bindParam(":codigo", $codigo);
+		
+		$stmt->execute();
+	}
+
+	public function returnNumero($codigo) {
+
+		if (($codigo[0] === 'Q') && ($codigo[3] === 'A')) {
+			$num = $codigo[1] . $codigo[2]; //concatenação entre as posições 1 e 2 da string codigo
+			
+			return $num;
+		}
+		else {
+			$num = $codigo[1];
+		
+			return $num;
+		}
+	}
+
+	//FIM DO CONJUNTO DE FUNCOES
 
 	public function select() {
 

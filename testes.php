@@ -15,9 +15,9 @@ echo "AQUI SÃO EXECUTADOS OS TESTES!<br>";
 
 $perg = new Pergunta();
 
-$results = $perg->select();
+//$results = $perg->recuperaQuestions();
 
-var_dump($results);
+//var_dump($results);
 
 
 
