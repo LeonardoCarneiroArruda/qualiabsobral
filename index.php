@@ -1,15 +1,15 @@
 <?php
 
 require_once("vendor/autoload.php");
-// require_once("vendor/classes/Page.php");
-// require_once("vendor/classes/Usuario.php");
-// require_once("vendor/classes/DB/Banco.php");
+require_once("functions.php");
 
 use Rain\Tpl;
 use \Slim\Slim;
 use \Classes\Page;
 use \Classes\Usuario;
 use \Classes\Candidato;
+use \Classes\Pergunta;
+use \Classes\Alternativa;
 
 
 $app = new Slim();
@@ -57,6 +57,50 @@ $app->get("/candidatos", function() {
 	]);
 
 });
+
+$app->get("/detalhes/:id_candidato", function($idcandidato) {
+
+	$candidato = new Candidato();
+
+	$result = $candidato->get($idcandidato);
+
+	$perguntas = new Pergunta();
+
+	$perguntas = $perguntas->select();
+
+	$page = new Page();
+
+	$page->setTpl("detail-candidato", [
+		'candidato'=>$result,
+		'perguntas'=>$perguntas
+	]);
+
+});
+
+$app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato, $idpergunta){
+
+	$candidato = new Candidato();
+
+	$result = $candidato->get($idcandidato);
+
+	$perguntas = new Pergunta();
+
+	$perguntas = $perguntas->get($idpergunta);
+
+	$alternativas = new Alternativa();
+
+	$alternativas = $alternativas->get($idpergunta);
+
+	$page = new Page();
+
+	$page->setTpl("detail-candidato-pergunta", [
+		'candidato'=>$result,
+		'perguntas'=>$perguntas,
+		'alternativas'=>$alternativas
+	]);
+
+});
+
 
 
 $app->run();

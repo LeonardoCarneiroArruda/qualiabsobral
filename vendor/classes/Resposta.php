@@ -1,6 +1,8 @@
 <?php
 
-require_once("DB". DIRECTORY_SEPARATOR ."config_banco.php");
+namespace Classes;
+
+use \Classes\DB\Banco;
 
 class Resposta {
 
@@ -41,6 +43,19 @@ class Resposta {
 	public function getIdalternativa() {
 		return $this->idalternativa;
 	}
+
+	public function insereResposta($resposta, $idcandidato, $idalternativa) {
+		$conn = Banco::connect();
+		
+		$stmt = $conn->prepare("insert into resposta (resposta, idcandidato, idalternativa) values (:resposta, :idcandidato, :idalternativa)");
+		$stmt->bindParam(":resposta", $resposta);
+		$stmt->bindParam(":idalternativa", $idalternativa);
+		$stmt->bindParam(":idcandidato", $idcandidato);
+
+		$stmt->execute();
+
+	}
+
 
 }
 

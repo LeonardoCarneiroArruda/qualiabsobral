@@ -48,6 +48,20 @@ class Candidato {
 		return $results;
 	}
 
+	public function get($idcandidato) {
+
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select * from candidato where idcandidato = :idcandidato");
+		$stmt->bindParam(":idcandidato", $idcandidato);
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $results[0];
+	}
+
 }
 
 

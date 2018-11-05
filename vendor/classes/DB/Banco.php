@@ -12,7 +12,7 @@ class Banco {
 	public static function connect() {
 
 		$conn = new \PDO("mysql:dbname=".Banco::DBNAME.";host=".Banco::HOSTNAME, Banco::USERNAME, Banco::PASSWORD);
-
+		//$conn->exec("set names utf8");
 		return $conn;
 	}
 
