@@ -10,6 +10,7 @@ use \Classes\Usuario;
 use \Classes\Candidato;
 use \Classes\Pergunta;
 use \Classes\Alternativa;
+use \Classes\Resposta;
 
 
 $app = new Slim();
@@ -91,12 +92,17 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 
 	$alternativas = $alternativas->get($idpergunta);
 
+	$respostas = new Resposta();
+
+	$respostas = $respostas->get($idcandidato, $idpergunta);
+
 	$page = new Page();
 
 	$page->setTpl("detail-candidato-pergunta", [
 		'candidato'=>$result,
 		'perguntas'=>$perguntas,
-		'alternativas'=>$alternativas
+		'alternativas'=>$alternativas,
+		'respostas'=>$respostas
 	]);
 
 });

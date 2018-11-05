@@ -56,6 +56,21 @@ class Resposta {
 
 	}
 
+	public function get($idcandidato, $idpergunta) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select * from resposta where idcandidato = :idcandidato and idalternativa in (SELECT idalternativa FROM `alternativa` WHERE idpergunta = :idpergunta)");
+		$stmt->bindParam(":idcandidato", $idcandidato);
+		$stmt->bindParam(":idpergunta", $idpergunta);
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $results;
+
+	}
+
 
 }
 
