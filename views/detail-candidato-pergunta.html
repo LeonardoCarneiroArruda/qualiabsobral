@@ -40,14 +40,15 @@
                 </thead>
                 <tbody>
                   {loop="$alternativas"}
-                  
+
                   <tr>
                     <td>{$value.codigo}</td>
                     <td>{function="formatText($value.descricao)"}</td>                   
-                    <td>{$value.peso}</td>
-                    <td></td>
+                    <td>{$value.peso}</td>                    
+                    <td>{$value.0}</td>
                   </tr>
                   {/loop}
+                  
                 </tbody>
               </table>
             </div>
@@ -55,6 +56,17 @@
           </div>
     </div>
   </div>
+<div class="row">
+    <div class="col-md-6">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading">Panel Heading</div>
+            <div class="panel-heading">Panel Heading</div>
+            <div class="panel-heading">Panel Heading</div>
+          </div>
+      </div>
+    </div>
+</div>
 
     </section>
     <!-- /.content -->

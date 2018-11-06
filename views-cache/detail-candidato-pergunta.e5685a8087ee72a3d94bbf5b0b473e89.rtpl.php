@@ -40,17 +40,15 @@
                 </thead>
                 <tbody>
                   <?php $counter1=-1;  if( isset($alternativas) && ( is_array($alternativas) || $alternativas instanceof Traversable ) && sizeof($alternativas) ) foreach( $alternativas as $key1 => $value1 ){ $counter1++; ?>
-                  
+
                   <tr>
                     <td><?php echo htmlspecialchars( $value1["codigo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo formatText($value1["descricao"]); ?></td>                   
-                    <td><?php echo htmlspecialchars( $value1["peso"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <?php $counter2=-1;  if( isset($respostas) && ( is_array($respostas) || $respostas instanceof Traversable ) && sizeof($respostas) ) foreach( $respostas as $key2 => $value2 ){ $counter2++; ?>
-                    <td><?php echo htmlspecialchars( $value2["resposta"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <?php } ?>
+                    <td><?php echo htmlspecialchars( $value1["peso"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>                    
+                    <td><?php echo htmlspecialchars( $value1["0"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                   </tr>
-                  
                   <?php } ?>
+                  
                 </tbody>
               </table>
             </div>
@@ -58,6 +56,17 @@
           </div>
     </div>
   </div>
+<div class="row">
+    <div class="col-md-6">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading">Panel Heading</div>
+            <div class="panel-heading">Panel Heading</div>
+            <div class="panel-heading">Panel Heading</div>
+          </div>
+      </div>
+    </div>
+</div>
 
     </section>
     <!-- /.content -->

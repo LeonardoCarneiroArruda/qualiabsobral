@@ -96,13 +96,16 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 
 	$respostas = $respostas->get($idcandidato, $idpergunta);
 
+	for ($i = 0; $i < count($alternativas); $i++) {
+		array_push($alternativas[$i], $respostas[$i]['resposta']);
+	}
+
 	$page = new Page();
 
 	$page->setTpl("detail-candidato-pergunta", [
 		'candidato'=>$result,
 		'perguntas'=>$perguntas,
-		'alternativas'=>$alternativas,
-		'respostas'=>$respostas
+		'alternativas'=>$alternativas		
 	]);
 
 });
