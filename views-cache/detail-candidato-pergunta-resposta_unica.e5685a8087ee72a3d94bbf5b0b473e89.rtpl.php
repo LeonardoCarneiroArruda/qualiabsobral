@@ -1,14 +1,14 @@
-
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Candidato: {$candidato.csf}
+        Candidato: <?php echo htmlspecialchars( $candidato["csf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
         
       </h1>
       <h3>
-        Pergunta: {function="formatText($perguntas.descricao)"}
+        Pergunta: <?php echo formatText($perguntas["descricao"]); ?>
       </h3>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -34,20 +34,20 @@
                     <th style="width: 10px">#</th>
                     <th>Alternativas</th>
                     <th>Peso</th>
-                    <th>RESPOSTA</th>
+                    
                     <!--<th style="width: 220px">Ações</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  {loop="$alternativas"}
+                  <?php $counter1=-1;  if( isset($alternativas) && ( is_array($alternativas) || $alternativas instanceof Traversable ) && sizeof($alternativas) ) foreach( $alternativas as $key1 => $value1 ){ $counter1++; ?>
 
                   <tr>
-                    <td>{$value.codigo}</td>
-                    <td>{function="formatText($value.descricao)"}</td>                   
-                    <td>{$value.peso}</td>                    
-                    <td>{$value.0}</td>
+                    <td><?php echo htmlspecialchars( $value1["codigo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo formatText($value1["descricao"]); ?></td>                   
+                    <td><?php echo htmlspecialchars( $value1["peso"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>                    
+                    
                   </tr>
-                  {/loop}
+                  <?php } ?>
                   
                 </tbody>
               </table>
@@ -56,21 +56,14 @@
           </div>
     </div>
   </div>
-<div class="row">
-    <div class="col-md-6">
-      <div class="panel-group">
-          <div class="panel panel-info">
-            <div class="panel-heading">Pontuação = {$pontuacao_total} --- {$pontuacao}</div>
-          </div>
-          <div class="panel panel-warning">
-            <div class="panel-heading"> > 75% ({function="return75($pontuacao_total)"})</div>
-            <div class="panel-heading"> <= 75% ({function="return75($pontuacao_total)"}) e >= 25% ({function="return25($pontuacao_total)"})</div>
-            <div class="panel-heading"> < 25% ({function="return25($pontuacao_total)"}) </div>
-          </div>
-      </div>
-    </div>
+<div class="row"> 
+<div class="col-md-6">
+  <div class="panel panel-success">
+    <div class="panel-heading">RESPOSTA</div>
+    <div class="panel-body"><?php echo htmlspecialchars( $respostas["resposta"], ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
+  </div>
 </div>
-
+</div>
     </section>
     <!-- /.content -->
   </div>

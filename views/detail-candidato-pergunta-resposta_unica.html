@@ -34,7 +34,7 @@
                     <th style="width: 10px">#</th>
                     <th>Alternativas</th>
                     <th>Peso</th>
-                    <th>RESPOSTA</th>
+                    
                     <!--<th style="width: 220px">Ações</th> -->
                   </tr>
                 </thead>
@@ -45,7 +45,7 @@
                     <td>{$value.codigo}</td>
                     <td>{function="formatText($value.descricao)"}</td>                   
                     <td>{$value.peso}</td>                    
-                    <td>{$value.0}</td>
+                    
                   </tr>
                   {/loop}
                   
@@ -56,21 +56,14 @@
           </div>
     </div>
   </div>
-<div class="row">
-    <div class="col-md-6">
-      <div class="panel-group">
-          <div class="panel panel-info">
-            <div class="panel-heading">Pontuação = {$pontuacao_total} --- {$pontuacao}</div>
-          </div>
-          <div class="panel panel-warning">
-            <div class="panel-heading"> > 75% ({function="return75($pontuacao_total)"})</div>
-            <div class="panel-heading"> <= 75% ({function="return75($pontuacao_total)"}) e >= 25% ({function="return25($pontuacao_total)"})</div>
-            <div class="panel-heading"> < 25% ({function="return25($pontuacao_total)"}) </div>
-          </div>
-      </div>
-    </div>
+<div class="row"> 
+<div class="col-md-6">
+  <div class="panel panel-success">
+    <div class="panel-heading">RESPOSTA</div>
+    <div class="panel-body">{$respostas.resposta}</div>
+  </div>
 </div>
-
+</div>
     </section>
     <!-- /.content -->
   </div>
