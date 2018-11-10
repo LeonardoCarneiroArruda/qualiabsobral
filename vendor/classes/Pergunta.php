@@ -144,13 +144,16 @@ class Pergunta {
 
 	//RECEBE UMA KEY E RETORNA O TIPO DA QUESTAO E O NUMERO DA QUESTAO
 	public function consulta($key) {
-
 		$descritivas = [0, 2, 91];
 		$resposta_unica = [0, 13, 19, 20, 23, 30, 31, 34, 35, 36, 39, 43, 44, 61, 78, 80, 83, 84];
 
-		$questao = explode("Q", $key);
+		$questao = explode("Q", $key);		
 		$questao = $questao[1];
 		$questao = explode("[", $questao);
+	
+		//FUNÇÃO PARA PEGAR QUESTAO QUE POSSUI OTHER
+		$other = substr($questao[1], 0, -1);
+
 		$questao = (int)$questao[0];
 
 		if (array_search($questao, $descritivas) != false) {
@@ -160,7 +163,7 @@ class Pergunta {
 			return ["resposta_unica", $questao];
 		}
 		else 
-			return ["mult_escolha", $questao];
+			return ["mult_escolha", $questao, $other];
 	}
 
 

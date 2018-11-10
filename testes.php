@@ -16,7 +16,7 @@ use \Classes\Resposta;
 
 echo "AQUI SÃO EXECUTADOS OS TESTES!<br>";
 
-$filename = "respostaindividual.csv";
+$filename = "respostaindividual2.csv";
 
 if (file_exists($filename)) {
 
@@ -58,16 +58,28 @@ if (file_exists($filename)) {
 		$codigo_alternativa = substr($string[1], 0, -1);
 		echo " codigo = $codigo_alternativa <br>";
 
+		if ($codigo_alternativa == "other") {
+			$string = explode("Q", $string[0]);
+		//	var_dump($string[1]);
+			
+		}
+
 		if ($retorno[0] == "descritiva" or $retorno[0] == "resposta_unica") {
 			$codigo_alternativa = "Q" . $retorno[1] . "R1";
 			$idalternativa = $alternativa->returnIdByCodigo($codigo_alternativa);
 
 		}
 		else {
-			$idalternativa = $alternativa->returnIdByCodigo($codigo_alternativa);	
+
+			if ($retorno[2] == "other") {
+				$codigo_alternativa = "Q" . $string[1] . "other";
+			}
+
+			$idalternativa = $alternativa->returnIdByCodigo($codigo_alternativa);
+
 		}
 
-		//$resposta->insereResposta($value, 19, $idalternativa);
+		$resposta->insereResposta($value, 20, $idalternativa);
 	
 	}
 

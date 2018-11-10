@@ -114,15 +114,21 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 		$pontuacao = 0;
 
 		for ($i = 0; $i < count($alternativas); $i++) {
-			array_push($alternativas[$i], $respostas[$i]['resposta']);
-			
+
+			if (isset($respostas[$i]['resposta'])) { 
+				array_push($alternativas[$i], $respostas[$i]['resposta']);
+			}
+			else {
+				array_push($alternativas[$i], " ");
+			}
+
 			$pontuacao_total += $alternativas[$i]['peso']; 
 			
 			if ($alternativas[$i][0] == "Sim") {
 				$pontuacao += $alternativas[$i]['peso']; 
 			} 
 		}
-
+		
 		$page = new Page();
 
 		$page->setTpl("detail-candidato-pergunta", [
