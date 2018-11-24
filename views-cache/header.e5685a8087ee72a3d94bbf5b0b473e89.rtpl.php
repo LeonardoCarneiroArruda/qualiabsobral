@@ -258,8 +258,8 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="/qualiabsobral/candidatos"><i class="fa fa-users"></i> <span>Candidatos</span></a></li>
-        <li><a href="/qualiabsobral/admin/categories"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
-        <li><a href="/qualiabsobral/admin/products"><i class="fa fa-link"></i> <span>Produtos</span></a></li>
+        <li><a href="/qualiabsobral/perguntas"><i class="fa fa-question-circle"></i> <span>Perguntas</span></a></li>
+        
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">

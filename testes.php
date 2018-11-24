@@ -84,56 +84,7 @@ if (file_exists($filename)) {
 		//$resposta->insereResposta($value, 20, $idalternativa);
 	
 	}
-
-/**/	
-	//FUNÇÃO DE TESTE DE LEITURA DO ARQUIVO, RESPOSTAS E CALCULO DA MEDIA
-
-	$alternativa = new Alternativa();
-
-	foreach ($data as $key => $value) {
-			
-		echo "<strong>Registro: $key</strong><br>";
-
-		echo "UBS: " . $value["token"] . "<br>";
-		$dividendo = 0;
-		$media = 0;
-		foreach ($value as $chave => $valor) {
-			
-			if ($chave[0] === 'B' && $chave[1] === '1') {
-
-				if ($chave[6] === '0') {
-					$num = $chave[7];
-				}
-				else {
-					$num = $chave[6] . $chave[7];
-				}
-
-				$codigo = "Q8A" . $num; 
-				
-				$peso = $alternativa->returnPeso($codigo);
-
-				$dividendo += (int)$peso;
-
-				echo $chave . ": " . $valor . " | Peso: " . $peso . "<br>";
-
-				if ($valor === 'Sim') 
-					$media += $peso;
-			}
-
-		}
-		$resultfinal = $media/$dividendo;
-		$percentual =  $resultfinal * 100;                                              //($resultfinal * 100) / 2; 
-		echo "Dividendo: $dividendo   Media: $media <br>";
-		echo "Media final: " . $resultfinal . "| Percentual: " . $percentual."%";
-		echo "<br>";
-		echo "Pontuação:  $dividendo <br>";
-		$setentaecinco = $dividendo * 0.75;
-		$vinteecinco = $dividendo * 0.25;
-		echo "> 75% ($setentaecinco) = 2 <br>";
-		echo "<= 75% ($setentaecinco) e >= 25% ($vinteecinco) = 1 <br>";
-		echo "< 25% ($vinteecinco) = 0<br><br>";
-
-	}
+	
 
 }
 

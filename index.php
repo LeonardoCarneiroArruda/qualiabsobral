@@ -11,6 +11,7 @@ use \Classes\Candidato;
 use \Classes\Pergunta;
 use \Classes\Alternativa;
 use \Classes\Resposta;
+use \Classes\Pontuacao;
 
 
 $app = new Slim();
@@ -48,13 +49,32 @@ $app->get("/index", function() {
 $app->get("/candidatos", function() {
 
 	$candidatos = new Candidato();
-
+	$medias = $candidatos->mediaFinal();
+	
 	$candidatos = $candidatos->selectAll();
 	
+	for($i = 0; $i < count($candidatos); $i++) {
+
+		$cand = $candidatos[$i]['idcandidato'];
+
+		foreach ($medias as $value) {
+			if ((isset($value[$cand])) && ($value[$cand])) {
+				$media = $value[$cand];
+				break;
+			}
+			else {
+				$media = "";
+			}
+		}
+
+		array_push($candidatos[$i], $media);
+
+	}
+
 	$page = new Page();
 
 	$page->setTpl("candidatos", [
-		'candidatos'=>$candidatos
+		'candidatos'=>$candidatos,
 	]);
 
 });
@@ -100,6 +120,10 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 	
 	if (array_search($idpergunta, $resposta_unica) != false) {
 		
+		$pont = new Pontuacao();
+		$pontos = $pont->returnPontuacao_respostaUnica($respostas[0], $alternativas);
+		$pont->inserePontuacao($pontos, $idcandidato, $idpergunta);
+		
 		$page = new Page();
 
 		$page->setTpl("detail-candidato-pergunta-resposta_unica", [
@@ -129,6 +153,13 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 			} 
 		}
 		
+		$porcentagem = ($pontuacao * 100) / $pontuacao_total;
+		$porcentagem = number_format($porcentagem, 2, ".", "");
+
+		$pont = new Pontuacao();
+		$pontos = $pont->returnPontuacao($pontuacao_total, $pontuacao);
+		$pont->inserePontuacao($pontos, $idcandidato, $idpergunta);
+
 		$page = new Page();
 
 		$page->setTpl("detail-candidato-pergunta", [
@@ -136,13 +167,113 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 			'perguntas'=>$perguntas,
 			'alternativas'=>$alternativas,
 			'pontuacao_total'=>$pontuacao_total,
-			'pontuacao'=>$pontuacao		
+			'pontuacao'=>$pontuacao,
+			'porcentagem'=>$porcentagem		
 		]);
 	
 	}
 
 	
 	
+
+});
+
+$app->get("/perguntas", function() {
+
+	$perguntas = new Pergunta();
+
+	$perguntas = $perguntas->select();
+
+	$page = new Page();
+
+		$page->setTpl("detail-pergunta", [
+			'perguntas'=>$perguntas	
+		]);
+
+});
+
+$app->get("/perguntas/:idpergunta", function($idpergunta) {
+
+	$pergunta = new Pergunta();
+
+	$pergunta = $pergunta->get($idpergunta); 
+
+	$candidatos = new Candidato();
+
+	$candidatos = $candidatos->selectAll();
+
+	$resposta_unica = [0, 13, 19, 20, 23, 30, 31, 34, 35, 36, 39, 43, 44, 61, 78, 80, 83, 84];
+
+	if (array_search($idpergunta, $resposta_unica) != false) {
+		
+		$page = new Page();
+
+		$page->setTpl("detail-pergunta-candidato-resposta_unica", [
+			'candidatos'=>$candidatos, 
+			'pergunta'=>$pergunta			
+		]);
+	}
+	else {
+
+		$pontuacao = new Pontuacao();
+
+		$pontuacao = $pontuacao->getByPergunta($idpergunta);
+
+		for ($i = 0; $i < count($candidatos); $i++) {
+
+			$pontos = "";
+
+			for ($j = 0; $j < count($pontuacao); $j++) {	
+
+				if ($candidatos[$i]['idcandidato'] == $pontuacao[$j]['idcandidato']) {
+					$pontos = $pontuacao[$j]['pontuacao'];
+				}
+
+			}
+
+			array_push($candidatos[$i], $pontos);
+			
+		}
+
+		$media = "";
+		$um = 0;
+		$zero = 0;
+		$dois = 0;
+		$moda = "";
+
+		for ($i = 0; $i < count($candidatos); $i++) {
+			$media += $candidatos[$i]['0'];
+			
+			if ($candidatos[$i]['0'] == '2')
+				$dois++;
+			else if ($candidatos[$i]['0'] == '1')
+				$um++;
+			else if ($candidatos[$i]['0'] == '0')
+				$zero++;	
+		}
+
+		if (($dois > $um) && ($dois > $zero))
+			$moda = 2;
+		else if (($um > $dois) && ($um > $zero))
+			$moda = 1;
+		else if (($zero > $dois) && ($zero > $um))
+			$moda = 0;
+
+
+
+		$media = $media / count($candidatos); 
+		$media = number_format($media, 2, ".", "");
+
+		$page = new Page();
+
+		$page->setTpl("detail-pergunta-candidato", [
+			'candidatos'=>$candidatos, 
+			'pergunta'=>$pergunta,
+			'media'=>$media, 
+			'moda'=>$moda	
+		]);	
+	}
+
 
 });
 

@@ -62,6 +62,52 @@ class Candidato {
 		return $results[0];
 	}
 
+	public function mediaFinal() {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select idcandidato from candidato");
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		$mediaFinal = array();
+		foreach ($results as $value) {
+			$result = $this->mediaFinalIndividual($value['idcandidato']);
+			
+			array_push($mediaFinal, $result);
+		}
+
+		return $mediaFinal;
+
+	}
+
+	public function mediaFinalIndividual($idcandidato) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select idcandidato, pontuacao from pontuacao where idcandidato = :idcandidato");
+		$stmt->bindParam(":idcandidato", $idcandidato);
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		if (!$results) {
+			return false;
+		}
+
+		$total = 0;
+		foreach ($results as $key => $value) {
+			$total += $results[$key]['pontuacao']; 
+		}
+
+		$media = array();
+		$media = [$results[0]['idcandidato'] => ($total / count($results)) ];
+
+		return $media;
+	}	
+
+
 }
 
 

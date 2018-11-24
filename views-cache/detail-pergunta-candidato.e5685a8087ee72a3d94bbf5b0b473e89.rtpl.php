@@ -3,7 +3,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Candidatos
+    <br>
+    Pergunta: <?php echo formatText($pergunta["descricao"]); ?>
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -15,7 +16,7 @@
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-12">
+  	<div class="col-md-6">
   		<div class="box box-primary">
             
            <!-- <div class="box-header">
@@ -28,22 +29,16 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>CSF</th>
-                    <th>responsavel</th>
-                    <th>Média Final</th>
-                    <th style="width: 220px">Ações</th>
+                    <th>Pontuação</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php $counter1=-1;  if( isset($candidatos) && ( is_array($candidatos) || $candidatos instanceof Traversable ) && sizeof($candidatos) ) foreach( $candidatos as $key1 => $value1 ){ $counter1++; ?>
                   <tr>
                     <td><?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["csf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["responsavel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["0"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["csf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>                   
                     <td>
-                      <a href="/qualiabsobral/detalhes/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Detalhes</a>
-                      <a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Editar </a>
-                      <!--<a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a> -->
+                      <?php echo htmlspecialchars( $value1["0"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </td>
                   </tr>
                   <?php } ?>
@@ -53,6 +48,20 @@
             <!-- /.box-body -->
           </div>
   	</div>
+
+    <div class="col-md-5">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 60px"> Média: <?php echo htmlspecialchars( $media, ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
+          </div>
+      </div>
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 60px"> Moda: <?php echo htmlspecialchars( $moda, ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
+          </div>
+      </div>
+    </div>
+
   </div>
 
 </section>

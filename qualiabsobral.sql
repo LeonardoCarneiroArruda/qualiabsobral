@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Nov-2018 às 15:22
+-- Generation Time: 24-Nov-2018 às 17:27
 -- Versão do servidor: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -885,7 +885,7 @@ INSERT INTO `alternativa` (`idalternativa`, `descricao`, `peso`, `idpergunta`, `
 (843, '1) Conforme solicitação dos usuários ', 1, 61, 'Q61R1'),
 (844, '2) Ficam expostos em local de fácil acesso para todos ', 2, 61, 'Q61R2'),
 (845, '3) Cotas diferenciadas para a população mais vulnerável 0 ', 0, 61, 'Q61R3'),
-(846, '5) Não distribuímos preservativos nesta Unidade ', 0, 61, 'Q61R4'),
+(846, '4) Não distribuímos preservativos nesta Unidade ', 0, 61, 'Q61R4'),
 (847, '1) Utilizados para orientar e planejar as ações da Unidade ', 2, 78, 'Q78R1'),
 (848, '2) Disponibilizados para os sistemas de informação e utilizados somente pela gestão municipal ', 1, 78, 'Q78R2'),
 (849, '3) Não são utilizados para planejamento ', 0, 78, 'Q78R3'),
@@ -1172,6 +1172,41 @@ CREATE TABLE `pontuacao` (
   `idpergunta` int(11) NOT NULL,
   `idcandidato` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `pontuacao`
+--
+
+INSERT INTO `pontuacao` (`idpontuacao`, `pontuacao`, `idpergunta`, `idcandidato`) VALUES
+(17, '1', 4, 19),
+(18, '1', 8, 19),
+(19, '1', 9, 19),
+(20, '2', 16, 19),
+(21, '1', 4, 20),
+(22, '1', 8, 20),
+(23, '1', 9, 20),
+(24, '0', 16, 20),
+(25, '0', 10, 19),
+(26, '1', 26, 19),
+(27, '1', 26, 20),
+(28, '0', 11, 19),
+(29, '2', 12, 19),
+(30, '1', 13, 19),
+(32, '0', 19, 19),
+(33, '1', 20, 19),
+(34, '1', 23, 19),
+(35, '0', 30, 19),
+(36, '1', 31, 19),
+(37, '1', 34, 19),
+(38, '0', 35, 19),
+(39, '2', 36, 19),
+(40, '1', 43, 19),
+(41, '0', 44, 19),
+(43, '0', 61, 19),
+(44, '1', 78, 19),
+(45, '2', 80, 19),
+(46, NULL, 83, 19),
+(47, '2', 84, 19);
 
 -- --------------------------------------------------------
 
@@ -3039,7 +3074,7 @@ ALTER TABLE `pergunta`
 -- AUTO_INCREMENT for table `pontuacao`
 --
 ALTER TABLE `pontuacao`
-  MODIFY `idpontuacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpontuacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `resposta`
 --
