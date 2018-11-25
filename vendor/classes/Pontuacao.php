@@ -36,33 +36,45 @@ class Pontuacao {
 	}
 
 	public function inserePontuacao($pontuacao, $idcandidato, $idpergunta) {
-		$conn = Banco::connect();
-		
-		$stmt = $conn->prepare("select * from pontuacao where idcandidato = :idcandidato and idpergunta = :idpergunta");
-		$stmt->bindParam(":idcandidato", $idcandidato);
-		$stmt->bindParam(":idpergunta", $idpergunta);
+		$sem_pontuacao = [0, 1, 2, 3, 5, 6, 7, 24, 25, 73, 83, 90, 91];
 
-		$stmt->execute();
+		if (array_search($idpergunta, $sem_pontuacao) != false) {
 
-		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-		if (count($results) > 0) {
 			return false;
 		}
 		else {
 
 			$conn = Banco::connect();
-
-			$stmt = $conn->prepare("insert into pontuacao (pontuacao, idpergunta, idcandidato) values (:pontuacao, :idpergunta, :idcandidato)");
-			$stmt->bindParam(":pontuacao", $pontuacao);
-			$stmt->bindParam(":idpergunta", $idpergunta);
+		
+			$stmt = $conn->prepare("select * from pontuacao where idcandidato = :idcandidato and idpergunta = :idpergunta");
 			$stmt->bindParam(":idcandidato", $idcandidato);
+			$stmt->bindParam(":idpergunta", $idpergunta);
 
 			$stmt->execute();
 
-			return true;
+			$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+			if (count($results) > 0) {
+				return false;
+			}
+			else {
+
+				$conn = Banco::connect();
+
+				$stmt = $conn->prepare("insert into pontuacao (pontuacao, idpergunta, idcandidato) values (:pontuacao, :idpergunta, :idcandidato)");
+				$stmt->bindParam(":pontuacao", $pontuacao);
+				$stmt->bindParam(":idpergunta", $idpergunta);
+				$stmt->bindParam(":idcandidato", $idcandidato);
+
+				$stmt->execute();
+
+				return true;
+
+			}
 
 		}
+
+		
 
 	}
 
@@ -79,6 +91,19 @@ class Pontuacao {
 		return $results;
 
 	}
+
+		public function getByPergunta_respostaUnica($idpergunta) {
+			$conn = Banco::connect();
+
+			$stmt = $conn->prepare("select alternativa.idpergunta, resposta.resposta, idcandidato, peso from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and resposta.idalternativa in (select idalternativa from alternativa where idpergunta = :idpergunta)");
+			$stmt->bindParam(":idpergunta", $idpergunta);
+
+			$stmt->execute();
+
+			$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+			return $results;
+		}
 
 	public function returnPontuacao($pontuacao_total, $pontuacao) {
 		$setentaecinto = $pontuacao_total * 0.75;

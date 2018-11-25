@@ -20,4 +20,11 @@ function return25($valor) {
 	return $valor;
 }
 
+function formatFloat($valor) {
+	$valor = (float)$valor;
+	$valor = number_format($valor, 2, ".", "");
+
+	return $valor;
+}
+
 ?>

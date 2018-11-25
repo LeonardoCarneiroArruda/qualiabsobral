@@ -15,7 +15,7 @@
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-12">
+  	<div class="col-md-9">
   		<div class="box box-primary">
             
            <!-- <div class="box-header">
@@ -28,9 +28,9 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>CSF</th>
-                    <th>responsavel</th>
+                    <th>Responsável</th>
                     <th>Média Final</th>
-                    <th style="width: 220px">Ações</th>
+                    <th style="width: 180px">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,11 +39,11 @@
                     <td>{$value.idcandidato}</td>
                     <td>{$value.csf}</td>
                     <td>{$value.responsavel}</td>
-                    <td>{$value.0}</td>
+                    <td>{function="formatFloat($value.0)"}</td>
                     <td>
-                      <a href="/qualiabsobral/detalhes/{$value.idcandidato}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Detalhes</a>
-                      <a href="/qualiabsobral/candidatos/{$value.idcandidato}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Editar </a>
-                      <!--<a href="/qualiabsobral/candidatos/{$value.idcandidato}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a> -->
+                      <a href="/qualiabsobral/detalhes/{$value.idcandidato}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Respostas Detalhadas</a>
+                      <!--<a href="/qualiabsobral/candidatos/{$value.idcandidato}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Editar </a>
+                      <a href="/qualiabsobral/candidatos/{$value.idcandidato}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a> -->
                     </td>
                   </tr>
                   {/loop}
@@ -53,6 +53,13 @@
             <!-- /.box-body -->
           </div>
   	</div>
+     <div class="col-md-3">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 40px"> Média Geral de Sobral: {function="formatFloat($media_sobral)"}</div>
+          </div>
+      </div>
+    </div>
   </div>
 
 </section>

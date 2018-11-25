@@ -16,7 +16,7 @@
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-6">
+  	<div class="col-md-8">
   		<div class="box box-primary">
             
            <!-- <div class="box-header">
@@ -38,8 +38,8 @@
                   <tr>
                     <td>{$value.idcandidato}</td>
                     <td>{$value.csf}</td>                   
-                    <td></td>
-                    <td></td>
+                    <td>{$value.1}</td>
+                    <td>{$value.0}</td>
                   </tr>
                   {/loop}
                 </tbody>
@@ -48,6 +48,16 @@
             <!-- /.box-body -->
           </div>
   	</div>
+
+     <div class="col-md-4">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 60px"> Média: {$media}</div>
+          </div>
+      </div>
+      
+    </div>
+
   </div>
 
 </section>

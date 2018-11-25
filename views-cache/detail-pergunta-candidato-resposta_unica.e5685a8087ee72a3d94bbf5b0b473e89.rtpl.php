@@ -16,7 +16,7 @@
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-6">
+  	<div class="col-md-8">
   		<div class="box box-primary">
             
            <!-- <div class="box-header">
@@ -38,8 +38,8 @@
                   <tr>
                     <td><?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["csf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>                   
-                    <td></td>
-                    <td></td>
+                    <td><?php echo htmlspecialchars( $value1["1"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["0"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                   </tr>
                   <?php } ?>
                 </tbody>
@@ -48,6 +48,16 @@
             <!-- /.box-body -->
           </div>
   	</div>
+
+     <div class="col-md-4">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 60px"> Média: <?php echo htmlspecialchars( $media, ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
+          </div>
+      </div>
+      
+    </div>
+
   </div>
 
 </section>

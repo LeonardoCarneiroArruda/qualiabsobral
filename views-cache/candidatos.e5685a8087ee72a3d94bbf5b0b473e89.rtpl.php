@@ -15,7 +15,7 @@
 <section class="content">
 
   <div class="row">
-  	<div class="col-md-12">
+  	<div class="col-md-9">
   		<div class="box box-primary">
             
            <!-- <div class="box-header">
@@ -28,9 +28,9 @@
                   <tr>
                     <th style="width: 10px">#</th>
                     <th>CSF</th>
-                    <th>responsavel</th>
+                    <th>Responsável</th>
                     <th>Média Final</th>
-                    <th style="width: 220px">Ações</th>
+                    <th style="width: 180px">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,11 +39,11 @@
                     <td><?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["csf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["responsavel"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["0"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo formatFloat($value1["0"]); ?></td>
                     <td>
-                      <a href="/qualiabsobral/detalhes/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Detalhes</a>
-                      <a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Editar </a>
-                      <!--<a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a> -->
+                      <a href="/qualiabsobral/detalhes/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Respostas Detalhadas</a>
+                      <!--<a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Editar </a>
+                      <a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $value1["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a> -->
                     </td>
                   </tr>
                   <?php } ?>
@@ -53,6 +53,13 @@
             <!-- /.box-body -->
           </div>
   	</div>
+     <div class="col-md-3">
+      <div class="panel-group">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 40px"> Média Geral de Sobral: <?php echo formatFloat($media_sobral); ?></div>
+          </div>
+      </div>
+    </div>
   </div>
 
 </section>
