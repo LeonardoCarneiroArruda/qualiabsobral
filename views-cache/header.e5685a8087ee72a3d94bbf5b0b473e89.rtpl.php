@@ -175,9 +175,9 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="/qualiabsobral/res/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="" class="user-image" alt="">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $usuarioLogado, ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -235,7 +235,7 @@ desired effect
           <img src="/qualiabsobral/res/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo htmlspecialchars( $usuarioLogado, ENT_COMPAT, 'UTF-8', FALSE ); ?> </p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -259,8 +259,9 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="/qualiabsobral/candidatos"><i class="fa fa-users"></i> <span>Candidatos</span></a></li>
         <li><a href="/qualiabsobral/perguntas"><i class="fa fa-question-circle"></i> <span>Perguntas</span></a></li>
+        <li><a href="/qualiabsobral/logoff"><i class="fa fa-power-off"></i> <span>Sair</span></a></li>
         
-        <li class="treeview">
+        <!--<li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -270,7 +271,7 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
             <li><a href="#">Link in level 2</a></li>
           </ul>
-        </li>
+        </li>-->
       </ul>
       <!-- /.sidebar-menu -->
     </section>

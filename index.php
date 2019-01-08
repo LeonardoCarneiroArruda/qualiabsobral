@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 require_once("vendor/autoload.php");
 require_once("functions.php");
@@ -31,11 +31,24 @@ $app->get("/", function() {
 
 $app->post("/login", function() {
 
-	Usuario::login($_POST['email'], $_POST['senha']);
+	if ((Usuario::login($_POST['email'], $_POST['senha']))) {
 
-	header("Location: /qualiabsobral/index");
+		session_start();
+		$_SESSION['email'] = $_POST['email'];
+		$_SESSION['senha'] = $_POST['senha'];
+		$_SESSION['nome'] = Usuario::returnNomePorEmail($_POST['email']);		
+
+		header("Location: /qualiabsobral/index");
+		exit;
+    }
+
+});
+
+$app->get("/logoff", function() {
+	session_start();
+	session_destroy();
+	header("Location: /qualiabsobral/");
 	exit;
-
 });
 
 $app->get("/index", function() {
@@ -52,7 +65,7 @@ $app->get("/candidatos", function() {
 	$medias = $candidatos->mediaFinal();
 	
 	$candidatos = $candidatos->selectAll();
-	
+
 	for($i = 0; $i < count($candidatos); $i++) {
 
 		$cand = $candidatos[$i]['idcandidato'];

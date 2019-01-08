@@ -58,9 +58,38 @@ class Usuario {
 		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		
 		if (count($results) == 0) {
-			throw new \Exception("Usuario ou senha incorretos!", 1);
-			
+			throw new \Exception("USUARIO OU SENHA INCORRETOS!", 1);
+			return false;
 		}
+
+		return true;
+
+	}
+
+	public static function returnNomePorEmail($email) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select nome from usuario WHERE email = :email");
+
+		$stmt->bindParam(":email", $email);
+
+		$result = $stmt->execute();
+
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $result[0]['nome'];
+	}
+
+	public static function checkLogin() {
+
+		if (!(isset($_SESSION['nome']) && isset($_SESSION['email']) && isset($_SESSION['senha'])) 
+			|| ($_SESSION['nome'] == "")
+			|| ($_SESSION['email'] == "")
+			|| ($_SESSION['senha'] == "")) {
+
+			header("Location: /qualiabsobral/");
+			exit;
+		} 
 
 	}
 

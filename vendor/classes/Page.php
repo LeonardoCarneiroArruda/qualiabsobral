@@ -30,8 +30,12 @@ class Page {
 
 		$this->setData($this->options["data"]);
 
-		if ($this->options["header"] === true)
+		if ($this->options["header"] === true) {
+			session_start();
+			Usuario::checkLogin();
+			$this->setData(['usuarioLogado'=>$_SESSION['nome']]);
 			$this->tpl->draw("header");
+		}
 	}
 
 	private function setData($data = array()) {
