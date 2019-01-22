@@ -1,0 +1,58 @@
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+     <br> <h1>
+        Pergunta: {function="formatText($pergunta.descricao)"} <br>
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        
+         <fieldset>
+           
+           <img src="../graficos/grafico{$pergunta.idpergunta}.php" alt="Gráfico 24" title="Gráfico 24" />
+
+         </fieldset>
+        
+        <div class="col-md-11"> 
+         <h4>{function="retornaRodapeGrafico($pergunta.idpergunta)"}</h4>
+        </div>
+        <br><br>
+        <h3>Quantidade de Unidades básicas de saúde que responderam Não aplica/Não encaminha por especialidade</h3> 
+        <div class="row">
+          <div class="col-md-5">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Especialidade</th>
+                      <th>Não aplica/Não encaminha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loop="$observacoes"}
+                    <tr>
+                      <td>{$key} </td>
+                      <td> {$value.1}</td>
+                    </tr>
+                    {/loop}
+                  </tbody>
+                </table>
+          </div>
+        </div>
+
+      <!-- Your Page Content Here -->
+
+    </section>
+    <!-- /.content -->
+
+  </div>
+  <!-- /.content-wrapper -->

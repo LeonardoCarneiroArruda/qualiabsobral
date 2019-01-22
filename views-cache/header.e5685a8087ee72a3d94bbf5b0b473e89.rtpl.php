@@ -24,6 +24,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   -->
   <link rel="stylesheet" href="/qualiabsobral/res/dist/css/skins/skin-blue.min.css">
 
+  <!-- ADICIONANDO BIBLIOTECA PARA CONSTRUÇÃO DE GRÁFICOS -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -232,7 +238,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/qualiabsobral/res/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+         <img src="./res/dist/img/avatar5.png" class="img-circle" >
         </div>
         <div class="pull-left info">
           <p><?php echo htmlspecialchars( $usuarioLogado, ENT_COMPAT, 'UTF-8', FALSE ); ?> </p>
@@ -242,7 +248,7 @@ desired effect
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -259,6 +265,7 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="/qualiabsobral/candidatos"><i class="fa fa-users"></i> <span>Candidatos</span></a></li>
         <li><a href="/qualiabsobral/perguntas"><i class="fa fa-question-circle"></i> <span>Perguntas</span></a></li>
+        <li><a href="/qualiabsobral/grafico"><i class="fa fa-signal"></i> <span>Gráficos</span></a></li>
         <li><a href="/qualiabsobral/logoff"><i class="fa fa-power-off"></i> <span>Sair</span></a></li>
         
         <!--<li class="treeview">

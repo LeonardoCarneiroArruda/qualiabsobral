@@ -27,4 +27,39 @@ function formatFloat($valor) {
 	return $valor;
 }
 
+function retornaRodapeGrafico($idpergunta) {
+
+	switch ($idpergunta) {
+		case 5:
+			return "Média do tempo de espera entre o encaminhamento e a consulta em SERVIÇOS DE REFERÊNCIA para especialidades acima";
+		break;
+
+		case 6: 
+			return "Média do tempo de espera entre a marcação de exames e a realização deles";
+		break;
+		
+		case 14: 
+			return "";
+		break;
+
+		case 24:
+			return "Número de Unidade Básicas de Saúde que responderam sobre a realização de apoio matricial na unidade";
+		break;
+
+		case 25:
+			return "Número de Unidade Básicas de Saúde que responderam sobre a realização de apoio matricial na unidade, se tem potencializado a capacidade resolutiva da equipe de saúde da família";
+		break;
+
+		case 39: 
+			return "Número de Unidade Básicas de Saúde que responderam sobre os casos de SIFILIS CONGENITA em gestantes no ultimo ano";
+		break;
+
+		default:
+			# code...
+			break;
+	}
+
+
+}
+
 ?>
