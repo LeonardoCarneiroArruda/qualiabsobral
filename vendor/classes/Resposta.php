@@ -287,7 +287,7 @@ class Resposta {
 	public function retornaListaDeQuestoesRespondidasPorCand($idcandidato) {
 		$conn = Banco::connect();
 
-		$stmt = $conn->prepare("select alternativa.idpergunta as pergunta from resposta, alternativa where resposta.idcandidato = :idcandidato and resposta.idalternativa = alternativa.idalternativa GROUP by alternativa.idpergunta");
+		$stmt = $conn->prepare("select idpergunta as pergunta from pontuacao where idcandidato = :idcandidato order by idpergunta");
 
 		$stmt->bindParam(":idcandidato", $idcandidato);
 		
