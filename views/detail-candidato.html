@@ -38,8 +38,7 @@
                   <tr>
                     <td>{$value.idpergunta}</td>
                     <td>{function="formatText($value.descricao)"}</td>
-                    <td> <a href="/qualiabsobral/candidatos/{$candidato.idcandidato}/resposta/{$value.idpergunta}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Ver Respostas </a></td>
-                   
+                    <td> <a href="/qualiabsobral/candidatos/{$candidato.idcandidato}/resposta/{$value.idpergunta}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Ver Respostas </a> {function="retornaSeQuestaoRespondida($listaQuestoesRespondidas, $value.idpergunta)"}</td>
                    
                   </tr>
                   {/loop}

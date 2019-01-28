@@ -56,20 +56,22 @@
           </div>
     </div>
   </div>
-<div class="row">
-    <div class="col-md-6">
-      <div class="panel-group">
-          <div class="panel panel-info">
-            <div class="panel-heading">Pontuação Total = <?php echo htmlspecialchars( $pontuacao_total, ENT_COMPAT, 'UTF-8', FALSE ); ?> | Pontuação = <?php echo htmlspecialchars( $pontuacao, ENT_COMPAT, 'UTF-8', FALSE ); ?> | Porcentagem = <?php echo htmlspecialchars( $porcentagem, ENT_COMPAT, 'UTF-8', FALSE ); ?>%</div>
+  <?php if( $exibePainel == true ){ ?>
+    <div class="row">
+        <div class="col-md-6">
+          <div class="panel-group">
+              <div class="panel panel-info">
+                <div class="panel-heading">Pontuação Total = <?php echo htmlspecialchars( $pontuacao_total, ENT_COMPAT, 'UTF-8', FALSE ); ?> | Pontuação = <?php echo htmlspecialchars( $pontuacao, ENT_COMPAT, 'UTF-8', FALSE ); ?> | Porcentagem = <?php echo htmlspecialchars( $porcentagem, ENT_COMPAT, 'UTF-8', FALSE ); ?>%</div>
+              </div>
+              <div class="panel panel-warning">
+                <div class="panel-heading"> > 75% (<?php echo return75($pontuacao_total); ?>) = 2</div>
+                <div class="panel-heading"> <= 75% (<?php echo return75($pontuacao_total); ?>) e >= 25% (<?php echo return25($pontuacao_total); ?>) = 1</div>
+                <div class="panel-heading"> < 25% (<?php echo return25($pontuacao_total); ?>) = 0</div>
+              </div>
           </div>
-          <div class="panel panel-warning">
-            <div class="panel-heading"> > 75% (<?php echo return75($pontuacao_total); ?>) = 2</div>
-            <div class="panel-heading"> <= 75% (<?php echo return75($pontuacao_total); ?>) e >= 25% (<?php echo return25($pontuacao_total); ?>) = 1</div>
-            <div class="panel-heading"> < 25% (<?php echo return25($pontuacao_total); ?>) = 0</div>
-          </div>
-      </div>
+        </div>
     </div>
-</div>
+  <?php } ?>
 
     </section>
     <!-- /.content -->

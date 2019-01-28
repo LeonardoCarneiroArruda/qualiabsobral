@@ -56,20 +56,22 @@
           </div>
     </div>
   </div>
-<div class="row">
-    <div class="col-md-6">
-      <div class="panel-group">
-          <div class="panel panel-info">
-            <div class="panel-heading">Pontuação Total = {$pontuacao_total} | Pontuação = {$pontuacao} | Porcentagem = {$porcentagem}%</div>
+  {if="$exibePainel == true"}
+    <div class="row">
+        <div class="col-md-6">
+          <div class="panel-group">
+              <div class="panel panel-info">
+                <div class="panel-heading">Pontuação Total = {$pontuacao_total} | Pontuação = {$pontuacao} | Porcentagem = {$porcentagem}%</div>
+              </div>
+              <div class="panel panel-warning">
+                <div class="panel-heading"> > 75% ({function="return75($pontuacao_total)"}) = 2</div>
+                <div class="panel-heading"> <= 75% ({function="return75($pontuacao_total)"}) e >= 25% ({function="return25($pontuacao_total)"}) = 1</div>
+                <div class="panel-heading"> < 25% ({function="return25($pontuacao_total)"}) = 0</div>
+              </div>
           </div>
-          <div class="panel panel-warning">
-            <div class="panel-heading"> > 75% ({function="return75($pontuacao_total)"}) = 2</div>
-            <div class="panel-heading"> <= 75% ({function="return75($pontuacao_total)"}) e >= 25% ({function="return25($pontuacao_total)"}) = 1</div>
-            <div class="panel-heading"> < 25% ({function="return25($pontuacao_total)"}) = 0</div>
-          </div>
-      </div>
+        </div>
     </div>
-</div>
+  {/if}
 
     </section>
     <!-- /.content -->

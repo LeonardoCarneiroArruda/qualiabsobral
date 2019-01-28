@@ -19,8 +19,8 @@
     <!-- Main content -->
     <section class="content">
 
-      <div class="row">
-        <div class="col-offset-3">
+      <div class="row ">
+        <div class="col-xs-5">
         <div class="panel-group">
             <div class="panel panel-warning">
               <div class="panel-heading" style="font-size: 20px"> 
@@ -31,21 +31,16 @@
             </div>
         </div>
       </div>
-    </div>
-
-    <!--<div class="row">
-      <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
-
-          <input type="file" name="file">
-          <br>
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Enviar</button>
-        </form>
-
+      <div class="col-xs-5">
+        <div class="panel-group">
+            <div class="panel panel-success">
+              <div class="panel-heading" style="font-size: 20px"> 
+                IMPORTANTE: Para que as respostas e os pontos de cada Candidato seja calculada, é necessário que visualize pelo menos 1 vez a resposta detalhada de cada pergunta.
+              </div>
+            </div>
+        </div>
       </div>
-
-    </div>-->
-
+    </div>
    
       <!-- Your Page Content Here -->
 

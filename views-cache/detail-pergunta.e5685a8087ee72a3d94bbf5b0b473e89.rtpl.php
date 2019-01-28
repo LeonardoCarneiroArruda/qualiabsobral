@@ -4,8 +4,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        PERGUNTAS
+        Relatório de pontuação por questão
       </h1>
+      <h2>
+        PERGUNTAS 
+      </h2>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>

@@ -284,6 +284,20 @@ class Resposta {
 		return $media;
 	}
 
+	public function retornaListaDeQuestoesRespondidasPorCand($idcandidato) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select alternativa.idpergunta as pergunta from resposta, alternativa where resposta.idcandidato = :idcandidato and resposta.idalternativa = alternativa.idalternativa GROUP by alternativa.idpergunta");
+
+		$stmt->bindParam(":idcandidato", $idcandidato);
+		
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $results;
+	}
+
 }
 
 

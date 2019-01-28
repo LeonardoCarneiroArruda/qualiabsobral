@@ -16,7 +16,7 @@ use \Classes\Resposta;
 
 echo "AQUI SÃO EXECUTADOS OS TESTES!<br>";
 
-$filename = "respostaindividual2.csv";
+$filename = "csfsinhasaboia.csv";
 
 if (file_exists($filename)) {
 
@@ -84,7 +84,7 @@ if (file_exists($filename)) {
 
 		}
 
-		//$resposta->insereResposta($value, 20, $idalternativa);
+		//$resposta->insereResposta($value, 21, $idalternativa);
 	
 	}
 	

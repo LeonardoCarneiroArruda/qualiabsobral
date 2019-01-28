@@ -41,6 +41,20 @@ $app->post("/login", function() {
 		header("Location: /qualiabsobral/index");
 		exit;
     }
+    else {
+
+    	header("Location: /qualiabsobral/views/loginError.html");
+    	exit;
+    }
+
+});
+
+
+$app->get("/loginError", function() {
+
+	$page = new Page();
+
+	$page->setTpl("loginError");
 
 });
 
@@ -56,104 +70,6 @@ $app->get("/index", function() {
 	$page = new Page();
 
 	$page->setTpl("index");
-
-});
-
-$app->post("/index", function() {
-	$file = $_FILES['file'];
-
-	if ($file["error"]) {
-		throw new Exception("Error ", $file["error"]);
-	}
-
-	$dirUploads = "uploads";
-
-	if (!is_dir($dirUploads)) {
-
-		mkdir($dirUploads);
-	
-	}
-
-	if (move_uploaded_file($file["tmp_name"], $dirUploads . DIRECTORY_SEPARATOR . $file["name"])) {
-
-		if (file_exists($file["name"])) {
-			echo "Arquivo enviado com sucesso";	
-
-			if (file_exists($file["name"])) {
-
-				$arquivo = fopen($file["name"], "r");
-var_dump($file["name"]);exit;
-				$headers = explode(";", fgets($arquivo));
-
-				$data = array();
-
-				while ($row = fgets($arquivo)) {
-										
-					$rowData = explode(";", $row);
-					$linha = array();
-
-					for ($i = 0; $i < count($headers); $i++) {
-					
-						$linha[$headers[$i]] = $rowData[$i];		
-					}
-
-					array_push($data, $linha);
-				}
-
-				fclose($arquivo);
-
-				//var_dump($data);
-				$i = 0;
-				$alternativa = new Alternativa();
-				$resposta = new Resposta();
-				$pergunta = new Pergunta();
-				//echo "<br><br> TESTES A PARTIR DAQUI <br><br>" ;
-				foreach ($data[0] as $key => $value) {
-					echo "============================= <br>";
-					echo "key = $key || ";
-					echo "value = $value <br>";
-					$retorno = $pergunta->consulta($key);
-					echo "Tipo da questao = " . $retorno[0];
-				
-					$string = explode("[", $key);
-					$codigo_alternativa = substr($string[1], 0, -1);
-					echo " codigo = $codigo_alternativa <br>";
-
-					if ($codigo_alternativa == "other") {
-						$string = explode("Q", $string[0]);
-					//	var_dump($string[1]);
-						
-					}
-
-
-					if ($retorno[0] == "descritiva" or $retorno[0] == "resposta_unica") {
-						$codigo_alternativa = "Q" . $retorno[1] . "R".$value[0];
-						$idalternativa = $alternativa->returnIdByCodigo($codigo_alternativa);
-
-
-					}
-					else {
-
-						if ($retorno[2] == "other") {
-							$codigo_alternativa = "Q" . $string[1] . "other";
-						}
-
-						$idalternativa = $alternativa->returnIdByCodigo($codigo_alternativa);
-						
-
-					}
-
-					//$resposta->insereResposta($value, 19, $idalternativa);
-				
-				}
-				
-			}
-		}
-	}
-	else {
-		throw new Exception("Não foi possivel fazer o Upload", 1);
-		
-	}
 
 });
 
@@ -207,11 +123,16 @@ $app->get("/detalhes/:id_candidato", function($idcandidato) {
 
 	$perguntas = $perguntas->select();
 
+	$listaQuestoesRespondidas = new Resposta();
+	$listaQuestoesRespondidas = $listaQuestoesRespondidas->retornaListaDeQuestoesRespondidasPorCand($idcandidato);
+	array_unshift($listaQuestoesRespondidas, "0");
+
 	$page = new Page();
 
 	$page->setTpl("detail-candidato", [
 		'candidato'=>$result,
-		'perguntas'=>$perguntas
+		'perguntas'=>$perguntas,
+		'listaQuestoesRespondidas'=>$listaQuestoesRespondidas
 	]);
 
 });
@@ -234,7 +155,7 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 
 	$respostas = $respostas->get($idcandidato, $idpergunta);
 
-	$resposta_unica = [0, 2, 13, 19, 20, 23, 30, 31, 34, 35, 36, 39, 43, 44, 61, 78, 80, 83, 84];
+	$resposta_unica = [0, 2, 13, 19, 20, 23, 30, 31, 34, 35, 36, 39, 43, 44, 61, 78, 80, 83, 84, 91];
 	
 	if (array_search($idpergunta, $resposta_unica) != false) {
 		
@@ -270,13 +191,15 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 				$pontuacao += $alternativas[$i]['peso']; 
 			} 
 		}
-		
+
 		$porcentagem = ($pontuacao * 100) / $pontuacao_total;
 		$porcentagem = number_format($porcentagem, 2, ".", "");
 
 		$pont = new Pontuacao();
 		$pontos = $pont->returnPontuacao($pontuacao_total, $pontuacao);
 		$pont->inserePontuacao($pontos, $idcandidato, $idpergunta);
+
+		$exibePainel = array_search($idpergunta, [0, 1, 3, 5, 6, 7, 90]) ? false : true; 
 
 		$page = new Page();
 
@@ -286,7 +209,8 @@ $app->get("/candidatos/:idcandidato/resposta/:idpergunta", function($idcandidato
 			'alternativas'=>$alternativas,
 			'pontuacao_total'=>$pontuacao_total,
 			'pontuacao'=>$pontuacao,
-			'porcentagem'=>$porcentagem		
+			'porcentagem'=>$porcentagem,
+			'exibePainel'=>$exibePainel		
 		]);
 	
 	}
@@ -384,41 +308,42 @@ $app->get("/perguntas/:idpergunta", function($idpergunta) {
 		}
 
 		$media = "";
-		$um = 0;
-		$zero = 0;
-		$dois = 0;
-		$moda = "";
+		$moda = [0,0,0];
+		$max = 0;
 
 		for ($i = 0; $i < count($candidatos); $i++) {
 			$media += $candidatos[$i]['0'];
 			
 			if ($candidatos[$i]['0'] == '2')
-				$dois++;
+				$moda[2]++;
 			else if ($candidatos[$i]['0'] == '1')
-				$um++;
+				$moda[1]++;
 			else if ($candidatos[$i]['0'] == '0')
-				$zero++;	
+				$moda[0]++;	
 		}
 
-		if (($dois > $um) && ($dois > $zero))
-			$moda = 2;
-		else if (($um > $dois) && ($um > $zero))
-			$moda = 1;
-		else if (($zero > $dois) && ($zero > $um))
-			$moda = 0;
-
-
+		$max = max($moda);
+		$cont = count($moda);
+		for($i = 0; $i < $cont; $i++) {
+			if (isset($moda[$i]) && $moda[$i] != $max) {
+				unset($moda[$i]);
+				$i--;
+			}
+		}
 
 		$media = $media / count($candidatos); 
 		$media = number_format($media, 2, ".", "");
 
+		$exibePainel = array_search($idpergunta, [0, 1, 2, 3, 5, 6, 7, 14, 24, 25, 90, 91]) ? false : true; 
+		
 		$page = new Page();
 
 		$page->setTpl("detail-pergunta-candidato", [
 			'candidatos'=>$candidatos, 
 			'pergunta'=>$pergunta,
 			'media'=>$media, 
-			'moda'=>$moda	
+			'moda'=>$moda,
+			'exibePainel'=>$exibePainel	
 		]);	
 	}
 

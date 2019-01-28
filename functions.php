@@ -58,8 +58,18 @@ function retornaRodapeGrafico($idpergunta) {
 			# code...
 			break;
 	}
-
-
 }
+
+
+function retornaSeQuestaoRespondida($lista, $idpergunta) {
+	
+	foreach ($lista as $key => $value) {
+
+		if (isset($value["pergunta"]) && $value["pergunta"] == $idpergunta) {
+			return "<i class='fa fa-check'></i>";
+		}
+	}
+}
+
 
 ?>

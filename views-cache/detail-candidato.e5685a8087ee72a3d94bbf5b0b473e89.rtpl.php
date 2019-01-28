@@ -38,8 +38,7 @@
                   <tr>
                     <td><?php echo htmlspecialchars( $value1["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo formatText($value1["descricao"]); ?></td>
-                    <td> <a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $candidato["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resposta/<?php echo htmlspecialchars( $value1["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Ver Respostas </a></td>
-                   
+                    <td> <a href="/qualiabsobral/candidatos/<?php echo htmlspecialchars( $candidato["idcandidato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/resposta/<?php echo htmlspecialchars( $value1["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Ver Respostas </a> <?php echo retornaSeQuestaoRespondida($listaQuestoesRespondidas, $value1["idpergunta"]); ?></td>
                    
                   </tr>
                   <?php } ?>

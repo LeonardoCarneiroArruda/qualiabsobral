@@ -36,7 +36,7 @@ class Pontuacao {
 	}
 
 	public function inserePontuacao($pontuacao, $idcandidato, $idpergunta) {
-		$sem_pontuacao = [0, 1, 2, 3, 5, 6, 7, 24, 25, 73, 83, 90, 91];
+		$sem_pontuacao = [0, 1, 2, 3, 5, 6, 7, 24, 25, 83, 90, 91];
 
 		if (array_search($idpergunta, $sem_pontuacao) != false) {
 

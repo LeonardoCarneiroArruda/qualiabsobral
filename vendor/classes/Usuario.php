@@ -58,7 +58,7 @@ class Usuario {
 		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		
 		if (count($results) == 0) {
-			throw new \Exception("USUARIO OU SENHA INCORRETOS!", 1);
+			//throw new \Exception("USUARIO OU SENHA INCORRETOS!", 1);
 			return false;
 		}
 
