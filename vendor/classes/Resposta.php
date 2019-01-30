@@ -298,6 +298,56 @@ class Resposta {
 		return $results;
 	}
 
+	public function retornaDadosGraficoQuestoesUmaAlternativa($idpergunta) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select * from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and alternativa.idpergunta = :idpergunta");
+		
+		$stmt->bindParam(":idpergunta", $idpergunta);
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		$dados = [0,0,0];
+		for ($i = 0; $i < count($results); $i++) {
+			if ($results[$i]["peso"] == 0)
+				$dados[0]++;
+			else if ($results[$i]["peso"] == 1)
+				$dados[1]++;
+			else if ($results[$i]["peso"] == 2)
+				$dados[2]++;
+		}
+
+		return $dados;
+	}
+
+	public function retornaDadosGraficoQuestao01() {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and alternativa.idpergunta = 01 and alternativa.codigo = 'Q1A1' order by resposta.idcandidato");
+
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		var_dump($results);
+
+	}
+
+	public function retornaDadosGraficoQuestao02() {
+		$conn = Banco::connect();
+
+		$stmt2 = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and alternativa.idpergunta = 02 and alternativa.codigo = 'Q2R1' order by resposta.idcandidato");
+	
+		$stmt2->execute();
+	
+		$results2 = $stmt2->fetchAll(\PDO::FETCH_ASSOC);
+
+		var_dump($results2);
+	}
+
+
 }
 
 

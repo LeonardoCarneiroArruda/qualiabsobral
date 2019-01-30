@@ -50,7 +50,67 @@
             <a href="/qualiabsobral/grafico/39" class="btn btn-default botao-grafico"> 39 </a>
          </div>
       </div>
-       
+
+       <div class="row">
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/13" class="btn btn-default botao-grafico"> 13 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/35" class="btn btn-default botao-grafico"> 35 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/36" class="btn btn-default botao-grafico"> 36 </a>
+         </div>
+      </div>
+
+
+       <div class="row">
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/43" class="btn btn-default botao-grafico"> 43 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/44" class="btn btn-default botao-grafico"> 44 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/61" class="btn btn-default botao-grafico"> 61 </a>
+         </div>
+      </div>      
+
+      <div class="row">
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/78" class="btn btn-default botao-grafico"> 78 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/84" class="btn btn-default botao-grafico"> 84 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/23" class="btn btn-default botao-grafico"> 23 </a>
+         </div>
+      </div>   
+
+      <div class="row">
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/20" class="btn btn-default botao-grafico"> 20 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/30" class="btn btn-default botao-grafico"> 30 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/31" class="btn btn-default botao-grafico"> 31 </a>
+         </div>
+      </div>   
+
+      <div class="row">
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/01" class="btn btn-default botao-grafico"> 01 </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/" class="btn btn-default botao-grafico">  </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/qualiabsobral/grafico/" class="btn btn-default botao-grafico">  </a>
+         </div>
+      </div> 
       <!-- Your Page Content Here -->
 
     </section>

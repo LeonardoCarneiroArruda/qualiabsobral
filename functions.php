@@ -55,7 +55,7 @@ function retornaRodapeGrafico($idpergunta) {
 		break;
 
 		default:
-			# code...
+			return "";
 			break;
 	}
 }
