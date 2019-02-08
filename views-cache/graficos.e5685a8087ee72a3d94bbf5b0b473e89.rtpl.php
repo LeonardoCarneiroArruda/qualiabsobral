@@ -26,91 +26,40 @@
 
     <!-- Main content -->
     <section class="content">
+ <div class="row">
+    <div class="col-md-9">
+      <div class="box box-primary">
+            
+           <!-- <div class="box-header">
+              <a href="/ecommerce/admin/users/create" class="btn btn-success">Cadastrar Usuário</a>
+            </div> -->
 
-      <div class="row">
-        <div class="col-md-3">
-          <a href="/qualiabsobral/grafico/5" class="btn btn-default botao-grafico" > 5 </a>
-        </div>
-        <div class="col-md-3">
-          <a href="/qualiabsobral/grafico/6" class="btn btn-default botao-grafico" > 6 </a>
-        </div>
-        <div class="col-md-3">
-          <a href="/qualiabsobral/grafico/14" class="btn btn-default botao-grafico"> 14 </a>
-       </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/24" class="btn btn-default botao-grafico"> 24 </a>
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Pergunta</th>
+                    <th style="width: 180px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $counter1=-1;  if( isset($perguntas) && ( is_array($perguntas) || $perguntas instanceof Traversable ) && sizeof($perguntas) ) foreach( $perguntas as $key1 => $value1 ){ $counter1++; ?>
+                  <tr>
+                    <td><?php echo formatText($value1["descricao"]); ?></td>
+                    <td>
+                      <a href="/qualiabsobral/grafico/<?php echo htmlspecialchars( $value1["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Visualizar Gráfico</a>
+                    </td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
           </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/25" class="btn btn-default botao-grafico"> 25 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/39" class="btn btn-default botao-grafico"> 39 </a>
-         </div>
-      </div>
-
-       <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/13" class="btn btn-default botao-grafico"> 13 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/35" class="btn btn-default botao-grafico"> 35 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/36" class="btn btn-default botao-grafico"> 36 </a>
-         </div>
-      </div>
+    </div>
+  </div>
 
 
-       <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/43" class="btn btn-default botao-grafico"> 43 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/44" class="btn btn-default botao-grafico"> 44 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/61" class="btn btn-default botao-grafico"> 61 </a>
-         </div>
-      </div>      
-
-      <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/78" class="btn btn-default botao-grafico"> 78 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/84" class="btn btn-default botao-grafico"> 84 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/23" class="btn btn-default botao-grafico"> 23 </a>
-         </div>
-      </div>   
-
-      <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/20" class="btn btn-default botao-grafico"> 20 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/30" class="btn btn-default botao-grafico"> 30 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/31" class="btn btn-default botao-grafico"> 31 </a>
-         </div>
-      </div>   
-
-      <div class="row">
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/01" class="btn btn-default botao-grafico"> 01 </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/" class="btn btn-default botao-grafico">  </a>
-          </div>
-          <div class="col-md-3">
-            <a href="/qualiabsobral/grafico/" class="btn btn-default botao-grafico">  </a>
-         </div>
-      </div> 
       <!-- Your Page Content Here -->
 
     </section>

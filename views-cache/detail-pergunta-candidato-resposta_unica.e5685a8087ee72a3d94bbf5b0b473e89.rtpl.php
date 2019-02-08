@@ -55,6 +55,12 @@
             <div class="panel-heading" style="font-size: 60px"> Média: <?php echo htmlspecialchars( $media, ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
           </div>
       </div>
+
+       <div class="panel-group">
+            <div class="panel panel-warning">
+              <div class="panel-heading" style="font-size: 60px"> Moda: <?php $counter1=-1;  if( isset($moda) && ( is_array($moda) || $moda instanceof Traversable ) && sizeof($moda) ) foreach( $moda as $key1 => $value1 ){ $counter1++; ?> <?php echo htmlspecialchars( $key1, ENT_COMPAT, 'UTF-8', FALSE ); ?> <?php } ?></div>
+            </div>
+        </div>
       
     </div>
 

@@ -7,10 +7,6 @@
         Pergunta: {function="formatText($pergunta.descricao)"} <br>
 
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -20,7 +16,7 @@
          <fieldset>
            
            <img src="../graficos/grafico{$pergunta.idpergunta}.php" alt="Gráfico 24" title="Gráfico 24" />
-
+           <p style="font-weight: bold;  ">*Todos os números se referem a quantidade de tempo em meses</p> 
          </fieldset>
         
         <div class="col-md-11"> 
@@ -29,19 +25,21 @@
         <br><br>
         <h3>Quantidade de Unidades básicas de saúde que responderam Não aplica/Não encaminha por especialidade</h3> 
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-7">
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>Especialidade</th>
                       <th>Não aplica/Não encaminha</th>
+                      <th>CSF</th>>
                     </tr>
                   </thead>
                   <tbody>
                     {loop="$observacoes"}
                     <tr>
-                      <td>{$key} </td>
-                      <td> {$value.1}</td>
+                      <td>{$key} {$especialidade = $key} </td>
+                      <td> {$value.1}</td> 
+                      <td>{if="$value.1 > 0"} {loop="$NaoSabeNaoEncaminha"} {function="formatText($value.descricao)"} - {$value.csf} <br> {/loop} {/if}</td>
                     </tr>
                     {/loop}
                   </tbody>

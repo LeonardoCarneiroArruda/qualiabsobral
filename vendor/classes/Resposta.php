@@ -322,29 +322,53 @@ class Resposta {
 		return $dados;
 	}
 
-	public function retornaDadosGraficoQuestao01() {
+	public function retornaDadosGraficoQuestao01($idcandidato) {
 		$conn = Banco::connect();
 
-		$stmt = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and alternativa.idpergunta = 01 and alternativa.codigo = 'Q1A1' order by resposta.idcandidato");
+		$stmt = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from alternativa, resposta where resposta.idalternativa = alternativa.idalternativa and alternativa.codigo = 'Q1A1' and resposta.idcandidato = :idcandidato");
+
+		$stmt->bindParam(":idcandidato", $idcandidato);
 
 		$stmt->execute();
 
 		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-		var_dump($results);
-
+		if (count($results) > 0)
+			return $results[0]["resposta"];
+		else 
+			return 0;
 	}
 
-	public function retornaDadosGraficoQuestao02() {
+	public function retornaDadosGraficoQuestao02($idcandidato) {
+		
 		$conn = Banco::connect();
 
-		$stmt2 = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from resposta, alternativa where resposta.idalternativa = alternativa.idalternativa and alternativa.idpergunta = 02 and alternativa.codigo = 'Q2R1' order by resposta.idcandidato");
-	
+		$stmt2 = $conn->prepare("select resposta.resposta, resposta.idcandidato, alternativa.idpergunta from  alternativa, resposta where resposta.idalternativa = alternativa.idalternativa and alternativa.codigo = 'Q2R1' and resposta.idcandidato = :idcandidato");
+
+		$stmt2->bindParam(":idcandidato", $idcandidato);
+
 		$stmt2->execute();
 	
 		$results2 = $stmt2->fetchAll(\PDO::FETCH_ASSOC);
 
-		var_dump($results2);
+		if (count($results2) > 0)
+			return $results2[0]["resposta"];
+		else 
+			return 0;
+	}
+
+	public function retornaNaoSabeNaoEncaminhaPorQuestao($idpergunta) {
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select alt.descricao, alt.idpergunta, res.resposta, res.idcandidato, candidato.csf from candidato, alternativa as alt left JOIN resposta as res on res.idalternativa = alt.idalternativa where alt.idpergunta = 5 and (res.resposta LIKE '%sabe%' or res.resposta LIKE '%encaminha%') and candidato.idcandidato = res.idcandidato order by alt.descricao");
+
+		$stmt->bindParam(":idpergunta", $idpergunta);
+
+		$stmt->execute();
+	
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $results;
 	}
 
 

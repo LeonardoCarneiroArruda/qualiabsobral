@@ -271,6 +271,30 @@ $app->get("/perguntas/:idpergunta", function($idpergunta) {
 		}
 
 		$media = "";
+		$moda = [0,0,0];
+		$max = 0;
+
+		for ($i = 0; $i < count($candidatos); $i++) {
+			$media += $candidatos[$i]['0'];
+			
+			if ($candidatos[$i]['0'] == '2')
+				$moda[2]++;
+			else if ($candidatos[$i]['0'] == '1')
+				$moda[1]++;
+			else if ($candidatos[$i]['0'] == '0')
+				$moda[0]++;	
+		}
+
+		$max = max($moda);
+		$cont = count($moda);
+		for($i = 0; $i < $cont; $i++) {
+			if (isset($moda[$i]) && $moda[$i] != $max) {
+				unset($moda[$i]);
+				$i--;
+			}
+		}
+
+		$media = "";
 		for ($i = 0; $i < count($candidatos); $i++) {
 			$media += $candidatos[$i]['0'];	
 		}
@@ -282,7 +306,8 @@ $app->get("/perguntas/:idpergunta", function($idpergunta) {
 		$page->setTpl("detail-pergunta-candidato-resposta_unica", [
 			'candidatos'=>$candidatos, 
 			'pergunta'=>$pergunta, 
-			'media'=>$media			
+			'media'=>$media, 
+			'moda'=>$moda			
 		]);
 	}
 	else {
@@ -351,9 +376,14 @@ $app->get("/perguntas/:idpergunta", function($idpergunta) {
 
 $app->get("/grafico", function() {
 
+	$perguntas = new Pergunta();
+	$perguntas = $perguntas->selectPerguntasComGrafico();
+
 	$page = new Page();
 
-	$page->setTpl("graficos");
+	$page->setTpl("graficos", [
+		'perguntas'=>$perguntas
+	]);
 }); 
 
 $app->get("/grafico/:idpergunta_grafico", function($idpergunta_grafico) {
@@ -374,13 +404,17 @@ $app->get("/grafico/:idpergunta_grafico", function($idpergunta_grafico) {
 	else {
 
 		$resposta = new Resposta();
+		
+		$NaoSabeNaoEncaminha = $resposta->retornaNaoSabeNaoEncaminhaPorQuestao($idpergunta_grafico);
+
 		$resposta = $idpergunta_grafico == 5 ? $resposta->retornaDadosGraficoQuestao5() : $resposta->retornaDadosGraficoQuestao6();
-		//var_dump($resposta);exit;
+//var_dump($NaoSabeNaoEncaminha);exit;
 		$page = new Page();
 
 		$page->setTpl("pergunta_grafico_comObs", [
 			"pergunta"=>$pergunta,
-			"observacoes"=>$resposta
+			"observacoes"=>$resposta,
+			"NaoSabeNaoEncaminha"=>$NaoSabeNaoEncaminha
 		]);
 	}
 	

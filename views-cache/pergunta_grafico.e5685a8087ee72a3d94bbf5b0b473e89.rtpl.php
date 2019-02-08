@@ -7,10 +7,7 @@
         Pergunta: <?php echo formatText($pergunta["descricao"]); ?> <br>
 
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
+      
     </section>
 
     <!-- Main content -->
@@ -19,14 +16,13 @@
         
          <fieldset>
            
-           <img src="../graficos/grafico<?php echo htmlspecialchars( $pergunta["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.php" alt="Gráfico 24" title="Gráfico 24" />
+           <img src="../graficos/grafico<?php echo htmlspecialchars( $pergunta["idpergunta"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.php" alt="" title="" />
 
          </fieldset>
-        
+
         <div class="col-md-11"> 
          <h4><?php echo retornaRodapeGrafico($pergunta["idpergunta"]); ?></h4>
         </div>
-
 
       <!-- Your Page Content Here -->
 
