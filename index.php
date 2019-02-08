@@ -38,12 +38,11 @@ $app->post("/login", function() {
 		$_SESSION['senha'] = $_POST['senha'];
 		$_SESSION['nome'] = Usuario::returnNomePorEmail($_POST['email']);		
 
-		header("Location: /qualiabsobral/index");
+		header("Location: " . DIRECTORY_SEPARATOR . "qualiabsobral".DIRECTORY_SEPARATOR."index");
 		exit;
     }
     else {
-
-    	header("Location: /qualiabsobral/views/loginError.html");
+    	header("Location: " . DIRECTORY_SEPARATOR ."qualiabsobral" . DIRECTORY_SEPARATOR . "views".DIRECTORY_SEPARATOR."loginError.html");
     	exit;
     }
 
@@ -61,7 +60,7 @@ $app->get("/loginError", function() {
 $app->get("/logoff", function() {
 	session_start();
 	session_destroy();
-	header("Location: /qualiabsobral/");
+	header("Location: ".DIRECTORY_SEPARATOR."qualiabsobral".DIRECTORY_SEPARATOR);
 	exit;
 });
 

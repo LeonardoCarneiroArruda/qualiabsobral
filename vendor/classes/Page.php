@@ -14,13 +14,13 @@ class Page {
 		"data"=>[]
 	];
 
-	public function __construct($opts = array(), $tpl_dir = "/qualiabsobral/views/") {
+	public function __construct($opts = array(), $tpl_dir = DIRECTORY_SEPARATOR."qualiabsobral".DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR) {
 
 		$this->options = array_merge($this->defaults, $opts);
 
 		$config = array(
 					"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir,
-					"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/qualiabsobral/views-cache/",
+					"cache_dir"     => $_SERVER["DOCUMENT_ROOT"].DIRECTORY_SEPARATOR."qualiabsobral".DIRECTORY_SEPARATOR."views-cache".DIRECTORY_SEPARATOR,
 					"debug"         => true
 		);
 
