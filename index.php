@@ -1,6 +1,6 @@
  <?php
 
-require_once("vendor/autoload.php");
+require_once("vendor" . DIRECTORY_SEPARATOR . "autoload.php");
 require_once("functions.php");
 
 use Rain\Tpl;

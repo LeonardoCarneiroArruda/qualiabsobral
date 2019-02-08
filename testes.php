@@ -1,6 +1,6 @@
 <?php
 
-require_once("vendor/autoload.php");
+require_once("vendor".DIRECTORY_SEPARATOR."autoload.php");
 // require_once("vendor/classes/Page.php");
 // require_once("vendor/classes/Usuario.php");
 // require_once("vendor/classes/DB/Banco.php");
@@ -84,7 +84,7 @@ if (file_exists($filename)) {
 
 		}
 
-		//$resposta->insereResposta($value, 25, $idalternativa);
+		////$resposta->insereResposta($value, 25, $idalternativa);
 	
 	}
 	
