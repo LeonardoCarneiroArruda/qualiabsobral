@@ -404,10 +404,9 @@ $app->get("/grafico/:idpergunta_grafico", function($idpergunta_grafico) {
 
 		$resposta = new Resposta();
 		
-		$NaoSabeNaoEncaminha = $resposta->retornaNaoSabeNaoEncaminhaPorQuestao($idpergunta_grafico);
+		$NaoSabeNaoEncaminha =  $resposta->retornaNaoSabeNaoEncaminhaPorQuestao($idpergunta_grafico);
 
-		$resposta = $idpergunta_grafico == 5 ? $resposta->retornaDadosGraficoQuestao5() : $resposta->retornaDadosGraficoQuestao6();
-//var_dump($NaoSabeNaoEncaminha);exit;
+		$resposta = $idpergunta_grafico == 5 ? $resposta->retornaDadosGraficoQuestao5() : $resposta->retornaDadosGraficoQuestao6() ;
 		$page = new Page();
 
 		$page->setTpl("pergunta_grafico_comObs", [

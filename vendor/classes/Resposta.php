@@ -360,7 +360,7 @@ class Resposta {
 	public function retornaNaoSabeNaoEncaminhaPorQuestao($idpergunta) {
 		$conn = Banco::connect();
 
-		$stmt = $conn->prepare("select alt.descricao, alt.idpergunta, res.resposta, res.idcandidato, candidato.csf from candidato, alternativa as alt left JOIN resposta as res on res.idalternativa = alt.idalternativa where alt.idpergunta = 5 and (res.resposta LIKE '%sabe%' or res.resposta LIKE '%encaminha%') and candidato.idcandidato = res.idcandidato order by alt.descricao");
+		$stmt = $conn->prepare("select alt.descricao, alt.idpergunta, res.resposta, res.idcandidato, candidato.csf from candidato, alternativa as alt left JOIN resposta as res on res.idalternativa = alt.idalternativa where alt.idpergunta = :idpergunta and (res.resposta LIKE '%sabe%' or res.resposta LIKE '%encaminha%') and candidato.idcandidato = res.idcandidato order by alt.descricao");
 
 		$stmt->bindParam(":idpergunta", $idpergunta);
 
@@ -369,6 +369,65 @@ class Resposta {
 		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		return $results;
+	}
+
+	public function retornaDadosGraficoQuestao83() {
+		
+		$profissionais = array(
+						"Enfermeiro" => 0,
+						"Medico" => 0,
+						"Dentista" => 0,
+						"Secretario de Saude" => 0,
+						"Nao tem gerente" => 0, 
+						"Outros" => 0
+						);
+
+		foreach ($profissionais as $key => $value) {
+			$profissionais[$key] = $this->calculaMediasGrafico83($key);
+		}
+		
+		return $profissionais;
+	}
+
+	public function calculaMediasGrafico83($profissionais) {
+		$conn = Banco::connect();
+
+		switch ($profissionais) {
+			case 'Enfermeiro':
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , r.resposta, a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Enfermeiro%' group by r.resposta");
+				break;
+			
+			case 'Medico':
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , r.resposta, a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Medico%' group by r.resposta");
+				break;
+
+			case 'Dentista':
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , r.resposta, a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Dentista%' group by r.resposta");
+				break;
+
+			case 'Secretario de Saude': 
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , r.resposta, a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Secretario de Saude%' group by r.resposta");
+			
+			case 'Nao tem gerente':
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , r.resposta, a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Nao tem gerente%' group by r.resposta");
+				break;
+
+			case 'Outros': 
+				$stmt = $conn->prepare("select count(*) as 'quantidade' , a.idalternativa, a.descricao from resposta as r, alternativa as a where r.idalternativa = a.idalternativa and a.idpergunta = 83 and a.descricao LIKE '%Outros%'");
+				break;
+			default:
+				# code...
+				break;
+		}
+	
+		$stmt->execute();
+
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		if (count($results) > 0)
+			return $results[0]["quantidade"];
+		else 
+			return 0;
 	}
 
 

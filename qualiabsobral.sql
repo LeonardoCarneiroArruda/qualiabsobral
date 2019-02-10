@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Fev-2019 às 01:00
+-- Generation Time: 10-Fev-2019 às 23:26
 -- Versão do servidor: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -874,9 +874,9 @@ INSERT INTO `alternativa` (`idalternativa`, `descricao`, `peso`, `idpergunta`, `
 (832, '3) Calendário programado de consultas de um ate 10 anos, alem de atendimentos eventuais não agendados', 2, 43, 'Q43R3'),
 (833, '4) Somente a partir de demanda do(s) responsável(is) ', 0, 43, 'Q43R4'),
 (834, '5) Não atende crianças ', 0, 43, 'Q43R5'),
-(835, '1) Por agente comunitário de saúde em visita domiciliar ', 0, 44, 'Q44R1'),
-(836, '2) Pela maternidade, na alta, pós parto ', 0, 44, 'Q44R2'),
-(837, '3) Pela maternidade ou Secretaria de Saúde, para recém-nascido de risco', 0, 44, 'Q44R3'),
+(835, '1) Por agente comunitário de saúde em visita domiciliar ', 2, 44, 'Q44R1'),
+(836, '2) Pela maternidade, na alta, pós parto ', 2, 44, 'Q44R2'),
+(837, '3) Pela maternidade ou Secretaria de Saúde, para recém-nascido de risco', 2, 44, 'Q44R3'),
 (838, '4) Quando a mãe procura pela Unidade (demanda espontânea) ', 0, 44, 'Q44R4'),
 (839, '5) Na última consulta de Pré Natal ', 1, 44, 'Q44R5'),
 (840, '6) O atendimento é realizado por enfermeiro ou médico durante visita domiciliar, sem agendamento prévio ', 2, 44, 'Q44R6'),
@@ -1113,7 +1113,7 @@ INSERT INTO `pergunta` (`idpergunta`, `descricao`, `tipo`, `idgrupo_pergunta`, `
 (47, '47. Os temas abordados em ações na COMUNIDADE (escolas, parques, clubes, entre outras) para atenção ao ADOLESCENTE são: ', '', 3, 'G3Q47'),
 (48, '48. As estratégias utilizadas pela Unidade para detecção de VIOLÊNCIA CONTRA CRIANÇAS E ADOLESCENTES são:', '', 3, 'G3Q48'),
 (49, '49. As ações planejadas e desenvolvidas com regularidade para ATENÇÃO AO ADULTO abordam as seguintes condições:   ', '', 3, 'G3Q49'),
-(50, '49. As ações planejadas e desenvolvidas com regularidade para ATENÇÃO AO ADULTO abordam as seguintes condições:   ', '', 3, 'G3Q50'),
+(50, 'As ações de rotina para pessoas com DOENÇAS CRÔNICAS NÃO TRANSMISSÍVEIS (insuficiência cardíaca, DPOC, obesidade, hipertensão/diabetes, outros) são:', '', 3, 'G3Q50'),
 (51, '51. Para pessoas com DOENÇAS CRÔNICAS NÃO TRANSMISSÍVEIS consideradas “difíceis” (faltosos, não aderentes ao tratamento, entre outros), usualmente a Unidade:', '', 3, 'G3Q51'),
 (52, '52. Para PESSOAS COM HIPERTENSÃO ARTERIAL, a Unidade realiza as seguintes atividades de rotina: ', '', 3, 'G3Q52'),
 (53, '53. Para pessoas com DIABETES TIPO II, a Unidade realiza as seguintes atividades de rotina: ', '', 3, 'G3Q53'),
@@ -1168,6 +1168,24 @@ CREATE TABLE `pontuacao` (
   `idpergunta` int(11) NOT NULL,
   `idcandidato` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `pontuacao`
+--
+
+INSERT INTO `pontuacao` (`idpontuacao`, `pontuacao`, `idpergunta`, `idcandidato`) VALUES
+(1, '1', 82, 6),
+(2, '1', 23, 6),
+(3, '2', 61, 20),
+(4, NULL, 61, 7),
+(5, '2', 23, 7),
+(6, NULL, 23, 16),
+(7, NULL, 23, 24),
+(8, '2', 49, 4),
+(9, '2', 50, 4),
+(12, '2', 44, 6),
+(13, '2', 44, 4),
+(14, '2', 44, 7);
 
 -- --------------------------------------------------------
 
@@ -16724,7 +16742,13 @@ INSERT INTO `resposta` (`idresposta`, `resposta`, `resposta_desc`, `idcandidato`
 (15525, 'NÃ£o', NULL, 25, 779),
 (15526, 'NÃ£o', NULL, 25, 780),
 (15527, '', NULL, 25, 945),
-(15528, '\r\n', NULL, 25, 782);
+(15528, '\r\n', NULL, 25, 782),
+(15529, 'Professor de Educacao Fisica', NULL, 6, 939),
+(15530, 'Nutricionista', NULL, 7, 939),
+(15531, 'Farmaceutico', NULL, 20, 939),
+(15532, 'Preservativos em falta ha alguns meses', NULL, 7, 902),
+(15533, 'PACIENTE ENCAMINHADO APOs CONSULTA COM MEDICO CLINICO DO CSF', NULL, 16, 876),
+(15534, 'central de marcacao de consultas', NULL, 24, 876);
 
 -- --------------------------------------------------------
 
@@ -16828,12 +16852,12 @@ ALTER TABLE `pergunta`
 -- AUTO_INCREMENT for table `pontuacao`
 --
 ALTER TABLE `pontuacao`
-  MODIFY `idpontuacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpontuacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `resposta`
 --
 ALTER TABLE `resposta`
-  MODIFY `idresposta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15529;
+  MODIFY `idresposta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15535;
 --
 -- AUTO_INCREMENT for table `usuario`
 --

@@ -170,7 +170,7 @@ class Pergunta {
 
 		$conn = Banco::connect();
 
-		$stmt = $conn->prepare("select * from pergunta where idpergunta in ( 1, 5, 6, 13, 20, 23, 24, 25, 30, 31, 35, 36, 39, 43, 44, 61, 78, 84)");
+		$stmt = $conn->prepare("select * from pergunta where idpergunta in ( 1, 5, 6, 13, 20, 23, 24, 25, 30, 31, 35, 36, 39, 43, 44, 61, 78, 83, 84)");
 
 		$stmt->execute();
 		
