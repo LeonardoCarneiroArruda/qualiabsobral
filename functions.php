@@ -71,6 +71,15 @@ function retornaSeQuestaoRespondida($lista, $idpergunta) {
 	}
 }
 
+function calculoRespostasSim($respostasSIM, $total) {
+
+	$valor = (($respostasSIM / $total) * 100);
+	$valor = number_format($valor, 2, ".", "");
+
+	return $valor; 
+
+}
+
 
 
 ?>

@@ -266,6 +266,7 @@ desired effect
         <li ><a href="/qualiabsobral/candidatos"><i class="fa fa-users"></i> <span>Candidatos</span></a></li>
         <li><a href="/qualiabsobral/perguntas"><i class="fa fa-question-circle"></i> <span>Perguntas</span></a></li>
         <li><a href="/qualiabsobral/grafico"><i class="fa fa-signal"></i> <span>Gráficos</span></a></li>
+        <li><a href="/qualiabsobral/consultaporcentagem"><i class="fa fa-search"></i> <span>Consulta % por questão</span></a></li>
         <li><a href="/qualiabsobral/logoff"><i class="fa fa-power-off"></i> <span>Sair</span></a></li>
         
         <!--<li class="treeview">

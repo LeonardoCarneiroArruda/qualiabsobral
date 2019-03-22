@@ -1,0 +1,74 @@
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Consulta de porcentagem das respostas por questão
+      </h1>
+      <h4>
+        Aqui você pode consultar a porcentagem de respostas de cada alternativa por questão, basta inserir o número da questão para consulta
+      </h4>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row ">
+        <div class="col-xs-3">
+          <div class="panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading" style="font-size: 20px"> 
+                  <form method="post" action="/qualiabsobral/consultaporcentagem">
+                    <label>Questão: </label><input type="text" class="form-control" name="questao" required="true">   
+                      <button type="submit" class="btn btn-primary btn-block btn-flat">CONSULTAR</button>
+                  </form>
+                </div>
+              </div>
+        </div>
+
+        </div>
+    </div>
+   
+   {if="$pergunta != null"}
+   <div class="row">
+      <div class="col-xs-8">
+         <h4>Pergunta: {function="formatText($pergunta.descricao)"}</h4>
+        <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Alternativas</th>
+                    <th style="width: 90px">Peso</th>
+                    <th style="width: 200px">% que marcou SIM</th>
+                    <!--<th style="width: 220px">Ações</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                 {loop="$alternativas"}
+                  <tr>
+                    <td></td>
+                    <td>{function="formatText($value.descricao)"}</td>                   
+                    <td>{$value.peso}</td>                    
+                    <td>{function="calculoRespostasSim($value.0, $totalCandidatos)"}%</td>
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+        </div>
+     </div>
+  </div>
+  {/if}
+      <!-- Your Page Content Here -->
+
+    </section>
+    <!-- /.content -->
+
+   
+  </div>
+  <!-- /.content-wrapper -->

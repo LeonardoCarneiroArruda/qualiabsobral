@@ -81,6 +81,20 @@ class Alternativa {
 		return $results[0]['idalternativa'];
 	}
 
+	public function consultaPorcentagemPorPergunta($idpergunta){
+		$conn = Banco::connect();
+
+		$stmt = $conn->prepare("select alt.idalternativa, count(*) as 'quantidade' from alternativa as alt left join resposta as res on res.idalternativa = alt.idalternativa where idpergunta = :idpergunta and resposta = 'Sim' group by alt.idalternativa");
+
+		$stmt->bindParam(":idpergunta", $idpergunta);
+
+		$stmt->execute();
+		
+		$results = $stmt->fetchAll(\PDO::FETCH_ASSOC); 
+
+		return $results;
+	}
+
 
 }
 

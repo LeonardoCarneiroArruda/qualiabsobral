@@ -430,7 +430,6 @@ class Resposta {
 			return 0;
 	}
 
-
 }
 
 

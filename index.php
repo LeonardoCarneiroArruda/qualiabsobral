@@ -420,6 +420,61 @@ $app->get("/grafico/:idpergunta_grafico", function($idpergunta_grafico) {
 	
 });
 
+$app->map("/consultaporcentagem", function(){
+
+	if ($_SERVER['REQUEST_METHOD'] == 'GET') { 
+		
+		$pergunta = null;
+		$alternativas = null;
+
+		$page = new Page();
+
+		$page->setTpl("consulta_porcentagem", [
+			"pergunta"=>$pergunta,
+			"alternativas"=>$alternativas
+		]);
+	}
+	else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		
+		$questao = $_POST['questao'];
+
+		$pergunta = new Pergunta();
+		$pergunta = $pergunta->get($questao);
+
+		$alt = new Alternativa();
+		$alternativas = $alt->get($questao);
+
+		$candidatos = new Candidato();
+		$candidatos = $candidatos->selectAll();
+		$totalCandidatos = count($candidatos);
+
+		$consulta = $alt->consultaPorcentagemPorPergunta($questao);
+
+		for ($i = 0; $i < count($alternativas); $i++) {
+
+			$qtd = 0;
+
+			for ($j = 0; $j < count($consulta); $j++) {
+				
+				if ($alternativas[$i]['idalternativa'] == $consulta[$j]['idalternativa']) {
+					$qtd = $consulta[$j]['quantidade'];
+				}
+			}
+
+			array_push($alternativas[$i], $qtd);
+		}
+
+		$page = new Page();
+
+		$page->setTpl("consulta_porcentagem", [
+			"pergunta"=>$pergunta,
+			"alternativas"=>$alternativas,
+			"totalCandidatos"=>$totalCandidatos		
+		]);
+	}
+
+})->via('GET', 'POST');
+
 
 $app->run();
 
